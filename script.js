@@ -23,7 +23,8 @@ document.getElementById("checkBtn").addEventListener("click", () => {
     const kdRatio = deaths === 0 ? Infinity : kills / deaths;
     let verdict = "You are a normal player";
 
-    const minDamageForRounds = Math.max(1000, rounds * 66.7); 
+    const minDamageForRounds = Math.max(1000, rounds * 70)
+    const proMinDamageForRounds = Math.max(1000, (rounds / 10) * 1000)
 
     if (isNaN(damage) || damage === "") {
         resultEl.textContent = "Please enter damage!";
@@ -35,6 +36,8 @@ document.getElementById("checkBtn").addEventListener("click", () => {
     } 
     else if (kdRatio < 1) {
         verdict = "You are a ruiner! K/D is too low! Maybe try to improve!";
+    } else if (kdRatio > 2 && damage >= proMinDamageForRounds){
+        verdict = "You are a PRO player! Keep destroying enemies!"
     }
 
     resultEl.textContent = verdict;
